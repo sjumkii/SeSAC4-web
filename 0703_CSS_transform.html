@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>CSS transform</title>
+        <style>
+            div {
+                position: absolute;
+                transform: skewY(20deg) translate(100px, 100px);
+            }
+            .div1 {
+                z-index: 100;
+
+            }
+            .div2 {
+                z-index: 50;
+                left: 150px;
+            }
+            .div3 {
+                left: 300px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="div1"><img src="square.PNG" width="300" height="150"></div>
+        <div class="div2"><img src="square.PNG" width="300" height="150"></div>
+        <div class="div3"><img src="square.PNG" width="300" height="150"></div>
+    </body>
+</html>

@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>CSS_animation1</title>
+        <style>
+            #ball {
+                width: 50px;
+                height: 50px;
+                background: aqua; 
+                /* 그냥 color가 아니라 background로 넣어주어야 함 */
+                border-radius: 70%; 
+                /* 50% 이상만 넣어주면 무조건 원형으로 나옴 */
+                position: relative; 
+                /* position지정하는거 까먹지 말기 */
+                animation-name: movement;
+                animation-duration: 3s;
+                animation-iteration-count: 6;
+            }
+
+            @keyframes movement {
+                0% { left: 0px; top: 0px; }
+                25% { left: 300px; top: 0px }
+                50% { left: 300px; top: 300px }
+                75% { left: 0px; top: 300px }
+                100% { left: 0px; top: 0px }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="ball"></div>
+    </body>
+</html>
