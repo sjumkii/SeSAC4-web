@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title></title>
+        <style>
+            div {
+                width: 100px;
+                height: 100px;
+                background-color: blue;
+                position: relative;
+                animation-name: myanimation;
+                animation-duration: 2s; /*이 애니메이션이 얼마동안 진행될지 결정하는 것. 지정을 안하면 0초로 인식하여 안움직임*/
+                animation-timing-function:  ease-out; /*ease-in: 천천히 시작해서 점점 속도를 올려라 ease-out: 빨리 시작해서 천천히 가라*/
+                animation-iteration-count: 3;
+            }
+            @keyframes myanimation {
+                0% { left: 0px;}
+                25% { left: 100px;}
+                50% { left: 200px;}
+                75% { left: 300px;}
+                100% { left: 400px;}
+            }
+        </style>
+    </head>
+
+    <body>
+        <div></div>
+    </body>
+</html>
