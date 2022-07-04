@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>table test</title>
+    <script language="javascript" type="text/javascript">
+        // http: //sadbuttrue.tistory.com/9        참고한 블로그
+        var liRowIdx = 0;
+
+        // Row 추가.
+        function addRow() {
+            var vid = document.getElementById("id").value,
+            vname = document.getElementById("name").value,
+            vaddress = document.getElementById("address").value;
+            if (vid != "" && vname != "" && vaddress != ""){
+                var oRow = document.all.dyntbl1.insertRow();
+                // onmouseover이벤트가 발생될때 fncOnMouseOver함수를 호출한다.
+                // 생성된 TR(Row)에 스타일 속성값을 정의 한다.
+                //    oRow.style.backgroundColor = '#b0b0b0';
+
+                var oCell0 = oRow.insertCell();
+                var oCell1 = oRow.insertCell();
+                var oCell2 = oRow.insertCell();
+                var oCell3 = oRow.insertCell();
+
+                oCell0.innerHTML = liRowIdx;    //번호 출력
+                oCell1.innerHTML = vid; //아이디
+                oCell2.innerHTML = vname;   //이름
+                //oCell3.innerHTML = "<a href='#' onClick=\"delRow(" + tbl.id + ")\">삭제<\/a>";
+                oCell3.innerHTML = vaddress;    //주소
+
+//                document.getElementById("id").value = "paranmul";
+//                document.getElementById("name").value = "오태현";
+                //                document.getElementById("address").value = "서울시 동작구 신대방 1동";
+                document.getElementById("id").value = "";
+                document.getElementById("name").value = "";
+                document.getElementById("address").value = "";
+                // RowIndex의 자동 재설정을 보여주기 위해 생성시마다 1씩 증가하는 변수.
+                liRowIdx++;
+            }
+            else{
+       //         alert("모든 데이터를 입력해 주세요");
+            }
+        }
+
+        // Row 최하단 추가 글 삭제
+        function delRow1(tdl) {
+            // table에서 지정한 줄(tr)을 rows 컬렉션에서 삭제한다.
+            if (liRowIdx > 0) {
+                dyntbl1.deleteRow(liRowIdx--);
+            }
+        }
+
+        function newpopup() {
+            window.open("htmlPage2_popup.htm", "팝업데이터", "width=800, height=100,left=100,top=100,toolbar=no, location=no, directories=no, status=no, menubar=no, resizable=no, scrollbars=no, copyhistory=no");
+        }
+
+    </script>
+</head>
+<body>
+        아이디 : <input type="text" name="id" id="id" value=""  maxlength="15" size="16"/>
+        이름 : <input type="text" name="name" id="name" value="" maxlength="3" size="4"/>
+        주소 : <input type="text" name="address" id="address" value=""/>
+        <input type="button" value=" 추가 " onclick="addRow()"/>
+        <input type="button" value=" 삭제 " onclick="delRow1(document.all.dyntbl1)"/>
+
+    <br /><br />
+    <div style="float: none">
+        <div style="float: left">
+            <table id="dyntbl1" border="1">
+                <tr>
+                    <td width="50">
+                        번호
+                    </td>
+                    <td width="170">
+                        아이디
+                    </td>
+                    <td width="105">
+                        이름
+                    </td>
+                    <td width="200">
+                        주소
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <input type="button" value=" 팝업 " onclick="newpopup()"/>
+        </div>
+    </div>
+</body>
+</html>
+

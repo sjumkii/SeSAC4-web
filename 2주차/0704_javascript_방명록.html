@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <title>방명록 만들기</title>
+        
+        <script>
+            function addrow () {
+ 
+                var input1 = count
+                var input2 = document.getElementById("name").value;
+                var input3 = document.getElementById("contents").value;
+                var input4 = new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDate() + new Date().getHours() + ":" + new Date().getMinutes()
+
+                var table = document.getElementsByTagName('table') [0];
+
+                var newRow = table.insertRow(1);
+
+                var cel1 = newRow.insertCell(0);
+                var cel2 = newRow.insertCell(1);
+                var cel3 = newRow.insertCell(2);
+                var cel4 = newRow.insertCell(3);
+
+                cel1.innerHTML = input1;
+                cel2.innerHTML = input2;
+                cel3.innerHTML = input3;
+                cel4.innerHTML = input4;
+
+            }
+
+        </script>
+    </head>
+
+    <body>
+        방명록입니다.<br><br>
+
+        <label>이름</label><input type="text" id="name" name="name"><br>
+        <label>내용</label><input type="text" id="contents" name="contents"><br><br>
+
+        <button type="button" value="작성하기" onclick="addrow();">작성</button><br><br>
+
+        <table border="1" id="table" style="text-align: center;">
+
+            <colgroup>
+                <col style="width: 100px">           
+                <col style="width: 200px">            
+                <col style="width: 300px">           
+                <col style="width: 200px">	
+            </colgroup>
+
+            
+            <tr>
+                <th>번호</th>
+                <th>작성자</th>
+                <th>내용</th>
+                <th>작성일</th>
+            </tr>
+            
+            <tbody id="tbshow"></tbody>
+        </table>
+    </body>
+</html>
+
+        
+
+        
