@@ -5,14 +5,14 @@
         <script>
             function addrow () {
  
-                var input1 = count
+                var input1 
                 var input2 = document.getElementById("name").value;
                 var input3 = document.getElementById("contents").value;
-                var input4 = new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDate() + new Date().getHours() + ":" + new Date().getMinutes()
+                var input4 = new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDate() + " " + new Date().getHours() + ":" + new Date().getMinutes()
 
                 var table = document.getElementsByTagName('table') [0];
 
-                var newRow = table.insertRow(1);
+                var newRow = table.insertRow(-1);
 
                 var cel1 = newRow.insertCell(0);
                 var cel2 = newRow.insertCell(1);
@@ -58,6 +58,8 @@
         </table>
     </body>
 </html>
+
+        
 
         
 
