@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>document</title>
+        <meta charset="UTF-8">
+
+        <script>
+            console.log( document.documentElement ); //편집기 안의 모든 내용을 출력
+            console.log( document.head );
+            console.log( document.title );
+            console.log( document.body ); //head태그 안에서는 null 이 뜸. why? 코드는 순서대로 읽는데 아직 body태그가 안만들어진 상태에서 body를 출력했으니 
+            console.log( document.URL ); //지금 실행시키고 있는 곳의 전체 주소
+            console.log( document.domain ); //사이트의 주소 
+        </script>
+    </head>
+    <body>
+        <div>
+            <p>HI</p>
+        </div>
+
+        <script>
+            console.log( document.body ); //body 태그 안에서는 정상적으로 읽음
+        </script>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<html>
+    <script>
+
+        //Date
+        var date = new Date();
+        console.log( date );
+
+        console.log( date.getFullYear() ); 
+        console.log( date.getMonth() );
+        console.log( date.getDate() );
+        console.log( date.getDay() );
+        console.log( date.getTime() );
+        console.log( date.getHours() );
+
+        console.log("---------------------------");
+
+        //Math
+        console.log( Math.min() );
+        console.log( Math.min( -10, 1, 2 ) ); //최소값 구하기
+        console.log( Math.min( -10, 2, "문자" ) ); //만약 비교할 수 없는값(문자)이 포함되어 있으면 NaN이 출력
+        console.log( Math.max( -10, 1, 2 ) );  //최댓값 구하기
+        
+        console.log( Math.random() ); //0보다 크고 1보다 작은 값중에서 무작위로 출력
+        
+        var max = 20;
+        var min = 10;
+        Math.random() * ( max - min ) + 10;
+
+        console.log( Math.round( -10.999) ); //소수점 첫째자리에서 반올림
+        console.log( Math.ceil( 11.12 ) ); //올림
+        console.log( Math.floor(11.8)); //버림
+    </script>
+</html>

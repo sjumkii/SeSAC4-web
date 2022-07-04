@@ -1,0 +1,83 @@
+<html>
+    <script>
+        var cat = { 
+            name: "나비",
+            age: 1,
+            mew: function () {
+                return "야옹";
+            }
+        };
+        console.log( "cat : " + cat ); //이을때 + 말고 ,를 적으면 객체를 객체 형태로 볼 수 있음
+        console.log( "cat : " , cat );
+        console.log( cat );
+        console.log( cat.name );
+        console.log( cat.mew() );
+
+        //
+
+        var arr1 = [1, 2, 3, "안녕", "반가워"];
+        
+        console.log( arr1.length ); //배열의 갯수
+        
+        arr1.push("내 이름") ; //배열의 끝에 추가하고 싶은 값을 추가하는 메소드
+        console.log(arr1);
+
+        arr1.pop(); //가장 마지막 항목을 제거하는 메소드
+        console.log(arr1);
+
+        arr1.unshift("내 이름") ; //배열의 맨앞에 추가하고 싶은 값을 추가하는 메소드
+        console.log(arr1);
+
+        arr1.shift("내 이름") ; //배열의 맨앞의 값을 제거하는 메소드
+        console.log(arr1);
+
+        console.log(arr1.indexOf("안녕")); //()안에 넣은 값이 몇번째 인덱스인가를 알려주는 메소드
+
+        //
+
+        var me = {
+            name: 'kyuri',
+            birth: '1115'
+        };
+        me['gender'] = 'F';
+        console.log( me['gender'] );
+
+
+        //기본자료형
+
+        var a = 1;
+        var b = a;
+        console.log( "a :", a ); 
+        console.log( "b :", b );
+        
+        a = 10;
+        console.log( "a :", a );
+        console.log( "b :", b ); //기본 자료형: b=a라고 해서 a의 값을 바꾼다고 b의 값이 바뀌지 않는다
+
+        //객체 자료형
+
+        var a1 = [ 1, 2, 3, 4, 5 ];
+        var a2 = a1;
+        console.log( "a1 :" , a1 );
+        console.log( "a2 :" , a2 );
+        
+        a1.pop();
+        console.log( "a1 :" , a1 );
+        console.log( "a2 :" , a2 ); //객체 자료형: a2=a1이므로 영향을 받아 a1의 값이 바뀌면 a2의 값도 바뀐다; a2는 a1의 주소를 값으로 갖기 때문에 a1이 바뀌면 a2도 바뀐다
+
+        //자료형 확인하기 
+
+        typeof('문자');
+        typeof(245);
+        typeof(function () {} );
+
+        //형변환
+
+        String(true)
+        
+        Number(true)
+        Number('10')
+
+        parseInt('10');
+    </script>
+</html>
