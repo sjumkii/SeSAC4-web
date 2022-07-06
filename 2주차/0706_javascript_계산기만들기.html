@@ -4,28 +4,17 @@
         <script>
             function calculate () {
                 
-                var input1 = Number(document.getElementById("value1").value);
+                var input1 = document.getElementById("value1").value;
                 //document.getElementById("value1")만 적었을 때는 실행했을 때 input태그 자체가 나옴 .value를 써 주어야 값1에 넣은 값이 나오게 됨
                 //input에 type를 텍스트로 설정했으므로 숫자를 입력해도 문자로 인식함. 따라서 Number를 적어주어 숫자로 형변환을 해주어야 함.
-                /*Number 대신 
+                var input2 = document.getElementById("value2").value;
+                var input3 = document.getElementById("operator").value;
+
                 input1 = parseInt(input1);
-                input2 = parseInt(input2); 으로도 가능함*/
+                input2 = parseInt(input2);
 
-                var input2 = Number(document.getElementById("value2").value);
-                var input3 = document.getElementById("operator").value
-                var input4 = document.getElementById("result")
-
-                if(input3 == "+") {
-                    input4 = input1 + input2 
-                } else if (input3 == "-") {
-                    input4 = input1 - input2 
-                } else if (input3 == "*") {
-                    input4 = input1 * input2 
-                } else if (input3 == "/") {
-                    input4 = input1 / input2 
-                } 
+                var input4
                 
-                /* 이 방식으로도 가능함 
                 switch ( input3 ) {
                     case " + " :
                         input4.value = input1 + input2;
@@ -39,7 +28,7 @@
                     case " / " :
                         input4.value = input1 / input2;
                     break;
-                }*/
+                }
                 
                 document.getElementById("result").value = input4 
             }
@@ -57,7 +46,6 @@
                 for (var i = 0; i <inputs.length; i++) {
                     inputs[i].value = "";
                 }*/
-
             }
         </script>
     </head>

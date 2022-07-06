@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>방명록</title>
+        <script>
+
+            var count = 1 //이 변수를 함수 안쪽에 선언해주면 이 값으로 초기화 시킨다는 의미이므로 count++이 적용되지 않고 계속 1값으로만 나온다.
+
+            function addrow () {
+
+                var name = document.getElementById("name").value;                
+                var contents = document.getElementById("content").value;
+
+                var table = document.getElementById("table").value;
+                var garo = document.createElement("tr");
+
+                var kan1 = document.createElement("td");
+                
+                kan1.innerText = document.querySelectorAll;
+                var kan2 = document.createElement("td");
+                kan1.innerText = name;
+                var kan3 = document.createElement("td");
+                kan1.innerText = contents;
+                
+                var kan4 = document.createElement("td");
+                
+                var date = new Date();
+                console.log( date );
+
+                kan4.innerText = new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDate() + " " + new Date().getHours() + ":" + new Date().getMinutes();
+
+                garo.appendChild(kan1);
+                garo.appendChild(ka2);
+                garo.appendChild(kan3);
+                garo.appendChild(kan4);
+                garo.appendChild(garo);
+                
+               
+
+            }    
+        </script>
+    </head>
+
+    <body>
+        <div>
+            <p>방명록입니다.</p>
+            
+            <div>
+                <table class="tb1"></table>
+            </div>
+        
+        </div>
+        
+        <label>작성자 </label><input type="text" id="name"><br>
+        <label>내용 </label><input type="text" id="contents" style="width: 300px;"><br><br>
+        <button type="button" onclick="addrow()">작성</button><br><br>
+
+        <table border="1" style="text-align: center;" id="table">   
+            <colgroup>
+                <col style="width: 100px;">
+                <col style="width: 200px;">
+                <col style="width: 300px;">
+                <col style="width: 200px;">
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th>번호</th>
+                    <th>작성자</th>
+                    <th>내용</th>
+                    <th>작성일</th>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

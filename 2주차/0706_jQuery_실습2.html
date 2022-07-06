@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="../jquery-ui-1.13.1.custom/jquery-ui.js"></script>
+        <link rel="stylesheet" href="../jquery-ui-1.13.1.custom/jquery-ui.css">
+
+        <style>
+            .css1 {
+                width: 100px;
+                height: 100px;
+                background-color: red;
+                border: red;
+            }
+            .css2 {
+                width: 100px;
+                height: 100px;
+                background-color: blue;
+                border: blue;
+            }
+            .css3 {
+                width: 100px;
+                height: 100px;
+                background-color: green;
+                border: green;
+            }
+            
+        </style>
+
+        <script>
+            function switchClass () {
+                if ( $("div").switchClass("css1") ) {
+                        $("div").switchClass("css1", "css2", 3000);
+                    }  else if ( $("div").switchClass("css2") ) {
+                        $("div").switchClass("css2", "css3", 3000);
+                    }  else if ( $("div").switchClass("css3") ) {
+                        $("div").switchClass("css3", "css1", 3000);     
+                }
+            }
+            
+        </script>
+
+        
+
+    </head>
+    <body>
+        <div></div>
+        <button type="button" onclick="switchClass" class="css1"></button>
+    </body>
+</html>

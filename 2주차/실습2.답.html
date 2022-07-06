@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <style>
+            .red {
+                background-color: red;
+            }
+            .orange {
+                background-color: orange;
+            }
+            .yellow {
+                background-color: yellow;
+            }
+            .green {
+                background-color: green;
+            }
+            .blue {
+                background-color: blue;
+            }
+            .purple {
+                background-color: purple;
+            }
+        </style>
+        <script>
+            var colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+
+            function changeColor(){
+                var now = $("div").attr("class");
+                var i = colors.indexOf(now);
+
+                if ( i== colors.length - 1 ) $("div").switchClass(now, colors[0]);
+                else $("div").switchClass(now, colors[i+1]);
+            
+            /* 방법1
+             function changeColor(){
+                if ( $("div").hasClass("red") ) $("div").switchClass("red","orange");
+                else if ( $("div").hasClass("orange") )$("div").switchClass("orange","yellow");
+                else if ( $("div").hasClass("yellow") )$("div").switchClass("yellow","green");
+                else if ( $("div").hasClass("green") )$("div").switchClass("green","blue");
+            }*/
+        }
+        </script>
+    </head>
+    <body>
+        <div id="div1" class="red" onclick="changeColor()"></div>
+    </body>
+</html>
