@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>클래스 바꾸기</title>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+        <script src="../jquery-ui-1.13.1.custom/jquery-ui.js"></script>
+
+        <link rel="stylesheet" href="../jquery-ui-1.13.1.custom/jquery-ui.css">
+
+        <script>
+            function switchClass () {
+                if ( $("button").hasClass("css1")) {
+                    $("button").switchClass("css1", "css2")
+                } else if ( $("button").hasClass("css2")) {
+                    $("button").switchClass("css2", "css3")
+                } else if ( $("button").hasClass("css3")) {
+                    $("button").switchClass("css3", "css1")
+                }
+            }
+        </script>
+
+        <style>
+            .css1{
+                background-color: red;
+                border: red;
+            }
+            .css2{
+                background-color: blue;
+                border: blue;
+            }
+            .css3{
+                background-color: green;
+                border: green;
+            }
+        </style>
+    </head>
+
+    <body>
+        <button type="button" onclick="switchClass()" style="width: 100px; height: 100px;" class="css1"></button>
+    </body>
+</html>
