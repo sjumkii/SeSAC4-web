@@ -4,6 +4,25 @@
         
         <script src=https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js></script>
 
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        
+        <script>
+          function message() {
+            swal({
+              title: "출석 완료!",
+              text: "출석체크를 완료하셨습니다!",
+              icon: "success",
+              button: "완료",
+            });
+          };
+        </script>
+
+        <script>
+          function clickme(){
+              window.scrollTo(0,0);
+          }
+        </script>
+
         <style>
             .nav-item {
                 padding: 20px;
@@ -19,7 +38,7 @@
                 color: #493f3f;
                 font-weight: bold;
             }
-            .bts {
+            .bts, #message {
                 background-color: transparent;
                 border: transparent;
                 font-weight: bold;
@@ -46,7 +65,17 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
             }
-
+            .goupbtn {
+                top: 90%;
+                left: 94%;
+                width: 40px;
+                height: 40px;
+                background-color: #ffffff;
+                border: black 1px solid; 
+                position: fixed;
+                z-index: 2;
+                font-size: 25px;
+            }
         </style>
     </head>
     <body>
@@ -56,18 +85,16 @@
         </div>
 
         <ul class="nav justify-content-center">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Best Item</a>
-            </li>
+            
             <li class="nav-item">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                       Outer
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      <li><a class="dropdown-item" href="#">Jacket</a></li>
+                      <li><a class="dropdown-item" href="#">Cardigan</a></li>
+                      <li><a class="dropdown-item" href="#">Coat</a></li>
                     </ul>
                   </div>
             </li>
@@ -77,9 +104,9 @@
                       Top
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      <li><a class="dropdown-item" href="#">Tee</a></li>
+                      <li><a class="dropdown-item" href="#">Knit</a></li>
+                      <li><a class="dropdown-item" href="#">Blouse</a></li>
                     </ul>
                   </div>
             </li>
@@ -89,9 +116,9 @@
                       Bottom
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      <li><a class="dropdown-item" href="#">Slacks</a></li>
+                      <li><a class="dropdown-item" href="#">Denim</a></li>
+                      <li><a class="dropdown-item" href="#">Shorts</a></li>
                     </ul>
                 </div>
             </li>
@@ -101,9 +128,9 @@
                       Dress
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      <li><a class="dropdown-item" href="#">Ops</a></li>
+                      <li><a class="dropdown-item" href="#">Jump Suit</a></li>
+                      <li><a class="dropdown-item" href="#">Sleep Wear</a></li>
                     </ul>
                 </div>
             </li>
@@ -130,6 +157,9 @@
                     </div>
                     </div>
                 </div>
+            </li>
+            <li class="nav-item">
+              <button onclick="message()" id="message">Check</button>
             </li>
           </ul>
 
@@ -188,6 +218,7 @@
                 </div>
             </div>
         </div>
-
-    </body>
+        
+        <input class="goupbtn" type="button" onclick="clickme()" value="^"></div>
+      </body>
 </html>
