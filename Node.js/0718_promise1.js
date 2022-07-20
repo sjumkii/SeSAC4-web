@@ -14,4 +14,4 @@ func1.then( value => { //성공할 경우 then에 들어옴
 
 func1.then( function(value){
     return value + "1";
-}).then( function)
+}).then( function ())
