@@ -9,7 +9,13 @@ const server = http.createServer( async function(req, res){
         const data = await fs. readFile("./0721_practice.html");
         res.writeHead(200);
         res.end(data);
-    } catch(err) {
+        //const data = await fs. readFile("./0721_practice.html");
+        //res.writeHead(200);
+        //res.write();
+        //res.end(data);
+    } 
+    
+    catch(err) {
         console.error(err);
         res.writeHead(404);
         res.end(err.message);
