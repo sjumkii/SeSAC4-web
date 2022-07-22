@@ -5,14 +5,9 @@ const fs = require('fs').promises;
 const server = http.createServer( async function(req, res){
     
     try {
-        console.log(req.url);
         const data = await fs. readFile("./0721_practice.html");
         res.writeHead(200);
         res.end(data);
-        //const data = await fs. readFile("./0721_practice.html");
-        //res.writeHead(200);
-        //res.write();
-        //res.end(data);
     } 
     
     catch(err) {
