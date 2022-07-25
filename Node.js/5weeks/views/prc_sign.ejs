@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>Sign.ejs</title>
+
+        <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
+        
+        <style>
+            .table {
+              width: 700px;
+              height: 300px;
+              margin-left:auto;
+              margin-right:auto;
+              margin-top: 100px;
+              text-align: left; 
+              border: 1px solid #c8c1c1;
+              color: #5d5959;
+            }
+            .table td {
+              padding-top: 13px;
+              padding-left: 15px;
+              border: 1px solid #c8c1c1;
+              font-size: 12px; 
+            }
+        </style>
+    </head>
+
+    <body>
+        <p style= "font-size: 25px; position: ;">REGISTER</p>
+        <div class="container">
+        <form action="sign" method ="POST">
+            <table class="table">
+                <tr>                        
+                    <td>아이디*</td>
+                    <td><input type="text" name="id" required> [ID 중복 검사]</td>
+                </tr>
+                <tr>
+                    <td>비밀번호*</td>
+                    <td><input type="password" name="password" required></td>
+                </tr>
+                <tr> 
+                    <td>비밀번호 확인*</td>
+                    <td><input type="password" name="re_password" required></td>
+                </tr>
+                <tr>
+                    <td>이름*</td>
+                    <td><input type="text" name="name" required></td>
+                </tr>
+                <tr>
+                    <td>휴대전화</td>
+                    <td><input type="tell" name="tell"></td>
+                </tr>
+                <tr>
+                    <td>이메일*</td>
+                    <td><input type="email" name="eamil" required></td>
+                </tr>
+            </table>
+                <button type="submit" class="btn btn-secondary" style="position: absolute; left: 48%; border-radius: 0%; font-size: 11px;">회원가입</button> 
+        </form>
+        </div>
+    </body>
+</html>
