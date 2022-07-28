@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title>Axios</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        
+        <script>
+            function sendGet(){
+                axios({
+                    method: "get",
+                    url: "http://localhost:8080/receive",
+                    params: {
+                        name: "code", 
+                        age: "17"
+                    } 
+                }).then((a) => { return a.data; })
+                .then((d) => {
+                    alert( d.message );
+                });
+            }
+            function sendPost(){
+                axios({
+                    method: "post",
+                    url: "http://localhost:8080/receive",
+                    data: {
+                        name: "code", 
+                        age: "17"
+                    } 
+                }).then((a) => { return a.data; })
+                .then((d) => {
+                    alert( d.message );
+                });
+            } //a, d 는 내가 맘대로 정한 변수임;  만약 이 then에서 console.log 대신 return a data;를 넣어주면 그 다음 then에서 받음 // alert를 띄울 수 있으니 까 원하는 메세지 띄울 수 있음 //여기까지는 통신만 한 것
+            function sendForm(){
+                var form = document.getElementById("form_info");
+                console.log( form );
+
+                //동적 form으로 데이터를 보낼 때 폼의 유효성 검사; required는 값을 넣지 않으면 넘어가지 않는다. 근데 동적 form의 경우에는 이를 위해 따로 지정을 해주어야 한다. // checkvalidity 를 넣어주면; 하나라도 지정한 속성을 지키지 않았다면 false가 뜬다
+           
+                var result = form.checkValidity();
+                if ( !result ){
+                    form.reportvalidity(); //reportvalidity는 지키지 않은 속성이 있다면 지키지 않은 곳에 알림이 뜨게 해준다. 
+
+                    return false;
+                }
+                console.log( result );
+                // console.log( form.name.value ); //form태그의 하위 태그를 가져오고 싶다면 name태그를 사용하여 가져올 수 있다. 
+                // console.log( form.age.value );
+
+                // axios({
+                //     method: "post",
+                //     url: "http://localhost:8080/receive",
+                //     data: {
+                //         name: form.name.value //첫번째 input창에 입력한 값이 axios로 보내고 그거에 대한 메시지를 받을 수 잇다. 
+                //     } 
+                // }).then((a) => { return a.data; })
+                // .then((d) => {
+                //     alert( d.message );
+                // });
+            }
+        </script>
+    </head>
+    <body>
+        <button onclick="sendGet();">sendGet</button>
+        <button onclick="sendPost();">sendPost</button>
+
+        <form id="form_info">
+            <input type="text" name="name" required>
+            <input type="text" name="age" required> 
+            <button type="button" onclick="sendForm()">sendForm</button>
+        </form>
+    </body>
+</html>

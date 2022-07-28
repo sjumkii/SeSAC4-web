@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <title>Practice_axios</title>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+        <script>
+            
+            function sendForm(){
+                var form = document.getElementById("form_info");
+                console.log( form );
+                
+                var result = form.checkValidity();
+                if ( !result ){
+                    form.reportvalidity();
+                    return false;
+                }
+                console.log( result );
+
+                axios({
+                    method: "get",
+                    url: "http://localhost:8080/receive",
+                    params: {
+                        name: form.name.value
+                    } 
+                }).then((a) => { return a.data; })//params?
+                .then((d) => {
+                    alert( d.message );
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <form id="form_info">
+            폼 전송 - 실습 <br><br>
+            
+            이름 <input type="text" name="name" required><br><br>
+            
+            성별 <input type="radio" name="gender"> 남자
+            <input type="radio" name="gender"> 여자 <br><br>
+            
+            생년월일
+            <select name="year" id="year">
+                <% for(var i = 1950; i <= 2023; i++){%>
+                <option value= "<%=i%>"><%=i%></option>
+                <% } %>
+            </select> 년
+            <select name="month" id="month">
+                <% for(var i = 1; i <= 12; i++){%>
+                <option value= "<%=i%>"><%=i%></option>
+                <% } %> 
+            </select> 월
+            <select name="day" id="day">
+                <% for(var i = 1; i <= 31; i++){%>
+                <option value="<%=i%>"><%=i%></option>
+                <% } %> 
+            </select> 일
+
+            <br><br>
+
+            <button onclick="sendForm()">회원가입</button>
+        </form>
+    </body>
+</html>

@@ -1,4 +1,4 @@
-// 회원가입 폼 만들기 
+//회원가입 폼 만들기
 
 const express = require("express")
 const app = express();
@@ -7,32 +7,11 @@ const bodyParser = require("body-parser");
 const { title } = require("process");
 const { readFile } = require("fs");
 const fs = require("fs").promises;
-const data = 
 
 app.set("view engine", "ejs");
 app.use( express.static( "public2" ) );
 app.use( express.urlencoded({extended: true}));
 app.use(bodyParser.json()); 
-
-app.get("/", function(req, res) {
-    res.render("prc_login"); 
-});
-
-app.post("/login", function(req, res) { 
-    var {id, password} = req.body;
-    console.log( req.body );
-    
-    fs.readFile("./info.txt")
-    .then(() => {
-        console.log("작성 완료");
-    })
-    .catch((err) => {
-        console.log( err );
-    });
-
-    res.render( "prc_login_receive", req.body );
-
-});
 
 app.get("/", function(req, res) {
     res.render("prc_sign"); 
