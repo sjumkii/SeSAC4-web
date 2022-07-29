@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>file upload</title>
+    </head>
+    <body>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            아이디 <input type="text" name="id" required><br><br>
+            <input type="file" name="userfile">
+            <input type="text" name="name">
+            <button>upload</button>
+        </form>
+        <br>
+        <form action="/upload/array" method="POST" enctype="multipart/form-data">
+            <input type="file" name="userfile" multiple> 
+            <!-- multiple은 파일을 여러개 선택 할 수 있게 해주는 속성 -->
+            <button>upload</button>
+        </form>
+        <br>
+        <form action="/upload/fields" method="POST" enctype="multipart/form-data">
+            <input type="file" name="userfile1">
+            <input type="file" name="userfile2">
+            <input type="file" name="userfile3">
+            <button>upload</button>
+        </form>
+    </body>
+</html>
