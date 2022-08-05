@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <title>방명록</title>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+        <script>
+            function writeComment(){
+                var form = document.getElementById("form_comment");
+                axios({
+                    method: 'post',
+                    url: 'http://localhost:8000/visitor/write',
+                    data: {
+                        name: form.name.value,
+                        comment: form.comment.value
+                    }
+                })
+                .then((rep) => { return rep.data; })
+                .then((data) => {
+                    // data = {id : 8} res.send에 적혀있던 것
+
+                    let html = 
+                    "<tr><td>" + data.id + "</td><td>" + form.name.value + "</td><td>" + form.comment.value + "</td></tr>" //새롭게 만들어질 행을 정의
+
+                    $( "table" ).append(html);
+                });
+            }
+        </script>
+
+    </head>
+
+    <body>
+        <form id="form_comment">
+            <fieldset style="width:300px;">
+                <legend> 방명록 등록 </legend>
+                <div><input type="text" name="name" placeholder="사용자 이름" id="name"></div>
+                <div><input type="text" name="comment" placeholder="방명록"></div>
+                <div id="button-group">
+                    <button type="button" value="작성하기" onclick="writeComment();">등록</button>
+                </div>
+            </fieldset>
+            
+        </form>
+        <table border="1" id="Visitor_list" style="text-align: center;">
+            <colgroup>
+                <col style="width: 100px">           
+                <col style="width: 200px">            
+                <col style="width: 300px">           
+                <col style="width: 100px">
+                <col style="width: 100px">	
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th>ID</th>
+                    <th>작성자</th>
+                    <th>방명록</th>
+                    <th>수정</th>
+                    <th>삭제</th>
+                </tr>
+                <% 
+                    for ( let i = 0; i < data.length; i++ ){
+                %>
+                <tr>
+                    <td><%=data[i].id%></td>
+                    <td><%=data[i].name%></td>
+                    <td><%=data[i].comment%></td>
+                    <td><button>수정</button></td>
+                    <td><button>삭제</button></td>
+                    <!-- data라는 key는 이 배열 자체를 의미 { id: 1, name: '홍길동', comment: '내가왔다' } ] 그리고 그 배열 안의 comment라는 키를 찾으라는 것  -->
+                </tr>
+                <%
+                    }
+                %>               
+            </tbody>
+        </table>
+    </body>
+</html>
