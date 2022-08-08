@@ -20,9 +20,78 @@
                     // data = {id : 8} res.send에 적혀있던 것
 
                     let html = 
-                    "<tr><td>" + data.id + "</td><td>" + form.name.value + "</td><td>" + form.comment.value + "</td></tr>" //새롭게 만들어질 행을 정의
+                    "<tr id='tr_" + data.id + "'><td>" + data.id + "</td><td>" + form.name.value + "</td><td>" + form.comment.value + "</td>" + "<td><button type='button' onclick='editComment(" + data.id + ");'>수정</button></td><td><button type='button' onclick='deleteComment(" + data.id + ");'>삭제</button></td></tr>"; //새롭게 만들어질 행을 정의
 
                     $( "table" ).append(html);
+                });
+            }
+
+            function editComment( id ){
+                axios({
+                    method: 'get',
+                    url: 'http://localhost:8000/visitor/get?id=' + id
+                })
+                .then((rep) => { return rep.data })
+                .then((data) => {
+                    console.log( data.result );
+
+                    var form = document.getElementById("form_comment");
+                    form.name.value = data.result.name;
+                    form.comment.value = data.result.comment;
+
+                    var html = "<button type = 'button' onclick='editDo(" + id + ");'>수정</button>" + "<button type = 'button' onclick='editCancel();'>취소</button>";;
+
+                    document.getElementById("button-group").innerHTML=html;
+                })
+            }    
+                    // { data : result };
+                    //[ { di: 0, name: 1 } ];
+                    // req.data.data[0].id;
+            
+            function editCancel() {
+                var form = document.getElementById("form_comment");
+                form.reset();
+
+                var heml = "<button type='button' onclick='writeCommnet();'>등록</button>";
+                document.getElementById("button-group").innerHTML = html;
+            }
+
+            function editDo( id ){
+                var form = document.getElementById("form_comment");
+                axios({
+                    method: 'patch',
+                    url: "http://localhost:8000/visitor/edit",
+                    data: {
+                        id: id,
+                        name: form.name.value,
+                        comment: form.comment.value //둘중 뭐가 수정됐는지 모르니까 name, comment 둘 다 써주기
+                    }
+                }).then((rep) => { return rep.data })
+                .then((data) => {
+                    alert( data );
+                    
+                    var tr = document.getElementById("tr_" + id);
+                    console.log(tr);
+                    var children = tr.children;
+                    
+                    $( children[1] ).text( form.name.value );
+                    $( children[2] ).text( form.comment.value );
+                    console.log( children );
+                })
+            }
+
+            function deleteComment( id ) {
+                axios({
+                    method: 'delete',
+                    url: "http://localhost:8000/visitor/delete",
+                    data: { id : id }
+                }).then((rep) => { return rep.data; })
+                .then((data) => { 
+                    alert( data ); 
+                    var tr = document.getElementById("tr_" + id);
+                    $( tr ).remove();
+
+                    //$("#tr_" + id).remove();
                 });
             }
         </script>
@@ -60,12 +129,12 @@
                 <% 
                     for ( let i = 0; i < data.length; i++ ){
                 %>
-                <tr>
+                <tr id="tr_<%=data[i].id%>">
                     <td><%=data[i].id%></td>
                     <td><%=data[i].name%></td>
                     <td><%=data[i].comment%></td>
-                    <td><button>수정</button></td>
-                    <td><button>삭제</button></td>
+                    <td><button type="button" onclick="editComment( '<%=data[i].id%>' );">수정</button></td>
+                    <td><button type="button" onclick="deleteComment( '<%=data[i].id%>' );">삭제</button></td>
                     <!-- data라는 key는 이 배열 자체를 의미 { id: 1, name: '홍길동', comment: '내가왔다' } ] 그리고 그 배열 안의 comment라는 키를 찾으라는 것  -->
                 </tr>
                 <%

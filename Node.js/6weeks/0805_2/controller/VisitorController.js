@@ -1,4 +1,5 @@
 const Visitor = require("../model/Visitor");
+const { route } = require("../routes");
 
 exports.get_visitors = (req,res) => {
     Visitor.get_visitors(function(result){
@@ -14,11 +15,33 @@ exports.post_comment = (req, res) => {
     Visitor.insert( req.body.name, req.body.comment, function(result) {
         res.send( {id: result} ); //값을 3개 보냄 name, comment 함수 이렇게 3개를 모델로 보냄. 즉 딕셔너리 형태로 클라이언트에게 응답한 것
     });
+}
 
+exports.get_visitor = (req, res) => {
+    Visitor.get_visitor( req.query.id, function(result) {
+        console.log("result : ", result );
+        console.log( "result[0] : ", result[0])
+        res.send( { result : result[0] } );
+    })
+}
+
+exports.patch_comment = (req, res) => {
+    Visitor.update( req.body, function(result){
+        console.log( result );
+        res.send( "수정 성공" );
+    });
+}
+
+exports.delete_comment = (req, res) => {
+    Visitor.delete( req.body.id, function(result){
+        console.log( result );
+        res.send( "삭제성공" );
+    })
+}
     // Visitor.update( )
 
     // Visitor.delete()
-}
+
 
 // function test(cb) {
 //     cb(12);
