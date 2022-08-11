@@ -6,38 +6,37 @@ const cnn = mysql.createConnection({
     database: 'sesac'
 });
 
-exports.get_signup = (cb) => {
-    cnn.query( 'SELECT * FROM sign', (err, rows) => {
-    if (err) throw err;
-    console.log( rows );
-    cb(rows);
+exports.signup = ( data, cb ) => {
+    var sql = `INSERT INTO sign VALUES('${data.id}','${data.pw}','${data.name}', '${data.num}', '${data.email}')`;
+    cnn.query( sql, function(err, rows) {
+        if ( err ) throw err;
+        cb( rows );
     });
 }
 
-exports.insert = ( id, pw, name, num, email, cb ) => {
-    var sql = "INSERT INTO sign(id, pw, name, num, email)VALUES('" + id + "', '" + pw + "', '" + name + "', '" + num + "', '" + email + "')";
-    cnn.query( sql, function(err, rows) {
+exports.post_login = (id, pw, cb) => {
+    let sql = `SELECT * FROM sign WHERE id=${id} and pw=${pw} limit 1;`;
+    cnn.query( sql, function(err, rows){
         if ( err ) throw err;
-
-        console.log( rows ); 
-        cb( rows.insertId )
+        cb( rows );
     })
 }
 
 exports.get_info = (id, cb) => {
-    cnn.query( `select * from sign where id = ${id} limit 1;` , (err, rows) => {
-        if( err ) throw err;
-        cb( rows );
+    let sql = `SELECT * FROM sign WHERE id=${id} limit 1;`;
+    cnn.query( sql, function(err, rows){
+        if ( err ) throw err;
+        cb(rows);
     });
 }
 
-exports.update = (data, cb) => {
-    let sql = `UPDATE sign SET id='${data.id}', pw='${data.pw}', name='${data.name}', num='${data.num}', email='${data.email}' WHERE id ='${data.id}'`;
-    console.log( sql );
-    cnn.query( sql, (err, rows) => {
-        if( err ) throw err;
+exports.info_update = (data, cb) => {
+    let sql = `UPDATE sign SET pw='${data.pw}', name='${data.name}', num='${data.num}', email='${data.email}', WHERE id='${data.id}'`;
+    cnn.query( sql, ( err, rows ) => {
+        if ( err ) throw err;
         cb( rows );
     })
+
 }
 
 exports.delete = (id, cb) => {
@@ -46,3 +45,4 @@ exports.delete = (id, cb) => {
         cb( rows );
     });
 }
+

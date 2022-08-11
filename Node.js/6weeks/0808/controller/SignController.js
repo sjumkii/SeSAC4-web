@@ -1,39 +1,43 @@
 const Sign = require("../model/Sign");
 const { route } = require("../routes");
 
-exports.get_signup = (req, res) => {
-    Sign.get_signup(function(result){
-        console.log( "result: ", result );
-        res.render("signup", { data: result });
-    })
+exports.signup = (req, res) => {
+        res.render("signup")
 }
 
 exports.post_signup = (req, res) => {
-    console.log( req.body );
-
-    Sign.insert( req.body.id, req.body.pw, req.body.name, req.body.num, req.body.email, function(result) {
-        res.send( {id: result} );
+    Sign.post_signup( req.body, function(result) {
+        res.send(true);
     });
 }
 
-exports.get_info = (req, res) => {
-    Sign.get_info( req.query.id, function(result) {
-        console.log( "result : ", result );
-        console.log( "result[0] : ", result[0]);
-        res.send({ result : result[0] });
+exports.login = (req, res) => {
+    res.render("login");
+}
+
+// exports.post_login = (req, res) => {
+//     Sign.post_login( req.body.id, req.body.pw, function(result){
+//         if ( result.length > 0 ) res.send(true);
+//         else res.send(false);
+//     })
+// }
+
+// exports.info = (req,res) => {
+//     Sign.get_info(req.body.id, function(result){
+//         if ( result.length > 0 ) res.render("info", {data: result[0]});
+//         else res.redirect("/sign/login");
+//     })
+// }
+
+exports.info_update = (req, res) => {
+    Sign.info_update( req.body, function(result) {
+        res.send("수정이 완료되었습니다");
     })
 }
 
-exports.patch_info = (req, res) => {
-    Sign.update( req.body, function(result){
-        console.log( result );
-        res.send( "수정 성공" );
-    })
-}
-
-exports.delete_info = (req, res) => {
+exports.info_delete = (req, res) => {
     Sign.delete( req.body.id, function(result){
         console.log(result);
-        res.send( "삭제 성공" );
+        res.send( "탈퇴가 완료되었습니다" );
     })
 }

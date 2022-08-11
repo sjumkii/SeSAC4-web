@@ -21,10 +21,8 @@
                 .then((rep) => { return rep.data; })
                 .then((data) => {
                     alert("회원가입 성공");
-                    document.location.href="/sign/login";
                 })
             }
-
         </script>
     </head>
 
@@ -39,10 +37,12 @@
                 <div>이메일: <input type="text" name="email"></div>
                 <br>
                 <div id="button-signup">
-                    <button type="button" value="회원가입" onclick="signUp();">회원가입</button>    
+                    <button type="button" value="회원가입" onclick="signUp();">회원가입</button>
+                </div>
+                <div id="button-signup">
+                    <a href="/sign/login"><button type="button" value="로그인">로그인</button></a>    
                 </div>
             </fieldset>    
         </form>
-        <a href="/user/signin">Login</a>
     </body>
 </html>

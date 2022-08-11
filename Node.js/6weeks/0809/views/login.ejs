@@ -3,14 +3,10 @@
         <title>로그인</title>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
+        
         <script>
             function login() {
-                var form = document.getElementById("form_login");
-                let user = {
-                    id: form.id.value,
-                    pw: form.pw.value
-                };
+                var form = document.getElementById("form_login")
                 axios({
                     method: 'post',
                     url: 'http://localhost:8000/sign/login',
@@ -33,7 +29,6 @@
             }
         </script>
     </head>
-
     <body>
         <form id="form_info" action="/sign/info" method="POST">
             <input type="hidden" name="id">
@@ -41,8 +36,8 @@
         <form id="form_login">
             <fieldset style="width: 500;">
                 <legend>로그인</legend>
-                <div>ID: <input type="text" name="id" placeholder="ID"></div>
-                <div>PW: <input type="password" name="pw" placeholder="PW"></div>
+                <div><input type="text" name="id" placeholder="ID"></div>
+                <div><input type="password" name="pw" placeholder="PW"></div>
                 
                 <div id="button-login">
                     <button type="button" value="로그인" onclick="login()">로그인</button>

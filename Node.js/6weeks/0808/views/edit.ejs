@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <title>회원정보 수정</title>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+        <script>
+            function editinfo( id ){
+                var form = document.getElementById("form_info");
+                axios({
+                    method: 'post',
+                    url: 'http://localhost:8000/sign/info/edit',
+                    data: {
+                        id: form.id.value,
+                        pw: form.pw.value,
+                        name: form.name.value,
+                        num: form.num.value,
+                        email: form.email.value
+                    }
+                })
+                .then((rep) => { return rep.data })
+                .then((data) => {
+                    alert( "수정 성공" );
+                })
+            }
+
+            function deleteinfo() {
+                var form = document.getElementById("form_info");
+                axios({
+                    method: 'post',
+                    url: "http://localhost:8000/sign/info/delete",
+                    data: {
+                        id: form.id.value
+                    }
+                }).then((rep) => { return rep.data; })
+                .then((data) => { 
+                    alert( "탈퇴 성공" ); 
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <form id="form_signup">
+            <fieldset style="width: 500;">
+                <legend> 회원가입 </legend>
+                <div>아이디: <input type="text" name="id"></div>
+                <div>비밀번호: <input type="password" name="pw"></div>
+                <div>이름: <input type="text" name="name"></div>
+                <div>휴대전화: <input type="text" name="num"></div>
+                <div>이메일: <input type="text" name="email"></div>
+                <br>
+                <div id="button-edit">
+                    <button type="button" value="수정" onclick="editinfo();">수정</button>    
+                </div>
+            </fieldset>    
+        </form>
+        <table border="1" id="Visitor_list" style="text-align: center;">
+            <colgroup>
+                <col style="width: 100px">           
+                <col style="width: 200px">            
+                <col style="width: 300px">           
+                <col style="width: 100px">
+                <col style="width: 100px">	
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th>ID</th>
+                    <th>작성자</th>
+                    <th>방명록</th>
+                    <th>수정</th>
+                    <th>삭제</th>
+                </tr>
+                <% 
+                    for ( let i = 0; i < data.length; i++ ){
+                %>
+                <tr id="tr_<%=data[i].id%>">
+                    <td><%=data[i].id%></td>
+                    <td><%=data[i].pw%></td>
+                    <td><%=data[i].name%></td>
+                    <td><%=data[i].num%></td>
+                    <td><%=data[i].email%></td>
+                    <td><button type="button" onclick="editinfo( '<%=data[i].id%>' );">수정</button></td>
+                    <td><button type="button" onclick="deleteinfo( '<%=data[i].id%>' );">탈퇴</button></td>
+                </tr>
+                <%
+                    }
+                %>               
+            </tbody>
+        </table>
+    </body>
+</html>
+        
