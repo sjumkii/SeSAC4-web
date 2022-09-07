@@ -1,0 +1,31 @@
+<!-- 서버 -->
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
+    </head>
+    <body>
+        <button type="button" onclick="btnClick()">클릭</button>
+        <script>
+            var socket = io.connect();
+
+            socket.on("connect", function() {
+                console.log( "server connected" );
+            }); //on이라는 함수의 "conncet"라는 이벤트 명으로 통신을 보내는 것
+
+            socket.on("hello", function(data) {
+                console.log( "data : ", data );
+            }); //이 코드 만으로는 절대hello 라는 console.log가 찍히지 않음. 
+                //index.js에 가서 socket.emit("hello", "sever hello"); 을 써주어야 함
+
+            // button 을 눌렀을 때 
+            function btnClick() {
+                console.log("click");
+                socket.emit("click", "Click!!");
+            }
+
+            socket.on("clickResponse", function(data) {
+                console.log( "response : ", data );
+            })
+        </script>
+    </body>
+</html> 

@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
+    </head>
+    <body>
+        <h1>Hello Wolrd!</h1>
+        <button type="button" onclick="Hello()">hello</button>
+        <button type="button" onclick="Study()">study</button>
+        <button type="button" onclick="Bye()">bye</button>
+
+        <br>
+
+        <h5 id="content"></h5>
+
+        <script>
+            var socket = io.connect();
+
+            // button 을 눌렀을 때 
+            function Hello() {
+                socket.emit("hello", "hello!");
+            }
+
+            function Study() {
+                socket.emit("study", "study!");
+            }
+
+            function Bye() {
+                socket.emit("bye", "bye!");
+            }
+
+            socket.on("Response", function(data) {
+                var tag = document.getElementById("content");
+                tag.textContent = data;
+            }); // 서버가 보내면 클라이언트가 여기서 받음
+
+        </script>
+    </body>
+</html> 
