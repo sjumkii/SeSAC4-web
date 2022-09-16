@@ -7,7 +7,7 @@ var io = require("socket.io")(http);
 
 app.get("/", function(req, res) {
     console.log("client");
-    res.sendFile(__dirname + "/index.html");
+    res.sendFile(__dirname + "/chat2.html");
 });
 
 io.on ("connection", function(socket){

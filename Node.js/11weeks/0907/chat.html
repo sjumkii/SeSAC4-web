@@ -1,78 +1,256 @@
 <html>
     <head>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js"></script>
-
-        <style>
-            .chat-list { 
-                background-color: skyblue; 
-                width: 50%; 
-                height:50%; 
-                padding: 10px;
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js 
+        "></script>
+        <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="https://kit.fontawesome.com/c35f3dd7d0.js" crossorigin="anonymous"></script>
+        <script>
+            function pressEnter() {
+                if (window.event.keyCode == 13) {
+                send();
+                }
             }
-            
+        </script>
+        <style>
+            .body {
+                height: 100vh;
+            }
+            .chat-list { 
+                border: 1px solid rgb(212, 208, 208);
+                border-bottom: none;
+                border-radius: 10px 10px 0px 0px;
+                width: 400px; 
+                height: 50vh;
+                padding: 10px;
+                overflow-y: auto;
+            }
             .chat-list div div { 
                 display: inline-block; 
-                padding:3px; 
+                padding:5px 10px 5px 10px; 
             }
-            
+            .notice { 
+                text-align: center;
+                font-size: 12px;
+            }
+            .notice div{ 
+                font-size: 12px;
+            }
             .my-chat { 
                 text-align: right; 
             }
-            
-            .my-chat div { 
-                background-color: yellow; 
+            .my-chat div:not(.time) { 
+                background-color: rgb(215, 234, 247); 
+                border-radius: 30px 30px 10px 30px;
+                margin: 5px 0;
             }
-            
-            .other-chat div { 
-                background-color: white;
+            .other-chat div:not(.time) { 
+                border: 1px solid rgb(212, 208, 208);
+                border-radius: 30px 30px 30px 10px;
+                color: rgb(54, 53, 53);
+                margin: 5px 0;
+            }
+            .message {
+                border: 1px solid red;
+            }
+            .sub {
+                position: relative;
+                text-align: center;
+                background-color: rgb(215, 234, 247);
+                padding: 5px 0;
+                width: 422px;
+                border-radius: 0px 0px 10px 10px;
+            }
+            #nick-list {
+                width: 60px;
+                border: none;
+                background-color: rgb(215, 234, 247);
+            }
+            .sub input {
+                width: 303px;
+                height: 35px;
+                border: none;
+                padding-left: 10px;
+            }
+            .sub button {
+                height: 34px;
+                border: none;
+                background-color: transparent;
+            }
+            /* #nick-list {
+                height: 39px;
+                width: 60px;
+                text-align: center;
+                background-color: rgba(40, 40, 222, 0.86);
+                color: white;
+                border-radius: 0 0 0 10px;
+                position: relative;
+                bottom: 2px;
+            }
+            .sub input {
+                width: 303px;
+                height: 39px;
+                position: relative;
+                bottom: 2px;
+                right: 6px;
+                border: 1px solid rgb(212, 208, 208);
+                margin: 0;
+                padding-left: 10px;
+            }
+            .sub button {
+                border: none;
+                background-color: rgba(40, 40, 222, 0.86);
+                padding: 12px 23px;
+                color: white;
+                font-size: 15px;
+                border-radius: 0 0 10px 0;
+                position: relative;
+                right: 13px;
+            } */
+            .nickname {
+                margin: 0 10px 0 5px;
+                font-size: 13px;
+            }
+            .chat-list::-webkit-scrollbar {
+                width: 5px;
+            }
+            .chat-list::-webkit-scrollbar-thumb {
+                background-color: rgb(108, 108, 114);
+                height: 20%;
+                border-radius: 10px;
+            }
+            .chat-list::-webkit-scrollbar-track {
+                background-color: transparent;
+            }
+            input:focus {
+                outline: none;
+            }
+            .time {
+                font-size: 12px;
+                position: relative;
+                top: 7px;
             }
         </style>
     </head>
-    <body>
-        <div id="chat-list" class="chat-list"></div>
-        <input type="text" id="message">
-        <button type="button" onclick="send();">전송</button>
-        <script>
-            var id = "";
-            var socket = io.connect();
-            socket.on("info", function(data) { id = data; });
 
-            function send() {
+    <body>
+
+        <div class="container">    
+            <div id="chat-list" class="chat-list"></div>
+            <div class="sub">
+                <select id="nick-list">
+                    <option value="전체">전체</option>
+                </select>
+                <input type="text" id="message" onkeyup="pressEnter();">
+                <button type="button" onclick="send();"><i class="fa-regular fa-paper-plane"></i></button>
+            </div>  
+        </div>
+        <script>
+            var nickname = prompt("닉네임을 입력해주세요.");
+            var socket = io.connect();
+            socket.emit("info2", { nickname: nickname } );
+            // socket.on("info", function(data){ console.log( data ); id = data;});
+
+            function send(){
                 let msg = document.getElementById("message").value;
+                let nick = document.getElementById("nick-list").value;
+
+                if (msg == "") {return false};
+
                 // socket.emit("send", {id, msg});
-                socket.emit("send", {id: id, msg: msg}); //위에 주석처리한 부분과 동일
+                socket.emit("send", { msg: msg , to: nick });
                 document.getElementById("message").value = "";
             }
             socket.on("newMessage", function(data){
-                // data = { id: ~~~, msg: ~~~ }
-                let chat_lsit = document.getElementById("chat-list");
-                let div = document.createElement("div");
-                let div_chat = document.createElement("div");
+                console.log( data );
+                // data = { id: ~~~, msg: ~~ }
+                let chat_list = document.getElementById("chat-list");
+                let div = document.createElement("div"); // <div></div>
+                let div_chat = document.createElement("div"); // <div></div>
+                var span = document.createElement("span");
+                let br = document.createElement("br");
+                var date = new Date();
+                let minute = (date.getMinutes()<10?'0' + date.getMinutes():'' + date.getMinutes())
+                if(date.getHours() > 12) {
+                    var time = "오후 " + (date.getHours()-12) + ':' + minute;
+                } else if (date.getHours() < 12) {
+                    var time = "오전 " + date.getHours() + ':' + minute;
+                } else { 
+                    var time = "오후 " + date.getHours() + ':' + minute;
+                }
+                
+                var div_time = document.createElement("div");
+                // <div></div>
+                div_time.classList.add("time");
+                div_time.textContent = time
+                div_chat.textContent = data.msg; // <div>{msg}</div>
 
-                div_chat.textContent = data.msg;
+                if ( data.is_dm ) div_chat.textContent = "(DM)" +  div_chat.textContent;
+                if ( data.nickname == nickname ) { div.classList.add("my-chat"); }
+                else {
+                    span.textContent = data.nickname;
+                    div.appendChild(span); 
+                    div.appendChild(br);
+                    span.classList.add("nickname");
+                    div.classList.add("other-chat"); 
+                }
 
-                if( data.id == id ) { div.classList.add("my-chat"); }
-                else { div.classList.add("other-chat"); }
-                // <div class = "my-chat"></div>
+                if ($(div).hasClass("my-chat")) {
+                    div.appendChild(div_time);
+                    div.appendChild(div_chat);
+                }
+                else {
+                    div.appendChild(div_chat);
+                    div.appendChild(div_time);
+                }
+                // <div class="my-chat"></div>
 
-                // div => <div class = "my-chat"></div>
+                // div => <div class="my-chat"></div>
                 // div_chat => <div>{msg}</div>
-
-                div.appendChild(div_chat);
-                // <div class = "my-chat">
-                   // <div> {msg} </div> 
+                
+                // div.appendChild(div_chat);
+                // <div class="my-chat">
+                    // <div>{msg}</div>
                 // </div>
-
-                chat_lsit.appendChild(div);
+                chat_list.appendChild(div);
             });
-
             socket.on("notice", function(data){
                 let chat_list = document.getElementById("chat-list");
-                let div = document.createElement("div");
-                div.textContent = data 
+                let div = document.createElement("div"); 
+                let div2 = document.createElement("div");
 
-                chat_list.appendChild(div);
-            })
+                div.textContent = data;
+                div2.classList.add("notice");
+
+                div2.appendChild(div);
+                chat_list.appendChild(div2);
+            });
+            socket.on("list", function(list){
+                // list = { id~~: nickname, id~~~~: nickname };
+                let nick_list = document.getElementById("nick-list");
+                while ( nick_list.firstChild ){
+                    nick_list.removeChild(nick_list.lastChild);
+                }
+                let option = document.createElement("option");
+                option.text = "전체";
+                option.value = "전체";
+                nick_list.appendChild( option );
+
+                var a = { 
+                    key1: '1',
+                    key2: '2',
+                    key3: '3'
+                };
+                for ( let [key,value] of Object.entries(a) ){
+                    // key = "key1", value="1";
+                    // key = "key2", value="2"
+                }
+                for ( let [key,value] of Object.entries(list) ){
+                    let option = document.createElement("option");
+                    option.text = value;
+                    option.value = value;
+                    nick_list.appendChild( option );
+                }
+            });
         </script>
     </body>
-</html> 
+</html>
