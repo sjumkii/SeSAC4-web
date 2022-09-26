@@ -11,9 +11,9 @@ root.render(
   <React.StrictMode>
     {/* <StateClass className='SeSAC'/> */}
     {/* <Counter /> */}
-    {/* <Event />
-    <EventClass /> */}
-    <Handler_ex />
+    <Event />
+    {/* <EventClass />
+    <Handler_ex /> */}
   </React.StrictMode>
 );
 
