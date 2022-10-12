@@ -1,0 +1,29 @@
+.gre {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+ul {
+    list-style: none;
+    display: flex;
+    position: relative;
+    bottom: 20px;
+}
+
+li {
+    margin: 20px;
+}
+
+.top {
+    display: flex;
+    position: relative;
+    background-color: antiquewhite;
+}
+
+.top1 {
+    background-color: antiquewhite;
+    padding: 10px;
+}
